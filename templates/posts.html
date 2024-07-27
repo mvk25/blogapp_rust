@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+
+{% block title %} Post page {% endblock %}
+
+{% block content %}
+    {% if let Some(error_message) = error %}
+    <p class="error">{{ error_message }}</p>
+    {% endif %}
+    <h1>Add Post</h1>
+    <form action="/add-post" method="post">
+        <div class="form-group">
+            <label for="title">Title</label>
+            <input type="text" id="name" name="title" required>
+        </div>
+        <div class="form-group">
+            <label for="body">Body</label>
+            <textarea name="body" id="body" required></textarea>
+        </div>
+        <div class="form-group">
+            <label for="img">Image</label>
+            <input type="text" id="img" name="img" required>
+        </div>
+        <div class="form-group">
+            <label for="published_by">Published by</label>
+            <input type="text" id="published_by" name="published_by">
+        </div>
+        <button type="submit">Add new Post</button>
+    </form>
+{% endblock %}

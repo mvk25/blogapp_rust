@@ -70,3 +70,57 @@ In the HTML template, Rust code and syntax are embedded to dynamically generate 
         {% endfor %}
     {% endif %}
 </div>
+
+
+## Setup and Running the Project
+
+To get started with the BlogApp project, follow these steps:
+
+### Cloning the Repository
+
+1. **Clone the Repository**: Begin by cloning the project repository from GitHub.
+
+    ```bash
+    git clone https://github.com/mvk25/blogapp_rust.git
+    cd blogapp
+    ```
+
+### Configuring Environment Variables
+
+2. **Create a `.env` File**: You need to set up a `.env` file in the root directory of the project to configure your database connection. Create a file named `.env` and add the following line, replacing `mypass` with your database password:
+
+    ```plaintext
+    DATABASE_URL=postgres://{username}:{password}@localhost/{db_name}
+    ```
+
+   Ensure that the `DATABASE_URL` matches your PostgreSQL database credentials and the desired database name.
+
+### Setting Up Migrations
+
+3. **Run Migrations**: To set up the database tables, you need to run the database migrations. First, ensure that Diesel CLI is installed. You can install it using Cargo if it's not already installed:
+
+    ```bash
+    cargo install diesel_cli --no-default-features --features postgres
+    ```
+
+   Then, run the migrations:
+
+    ```bash
+    diesel migration run
+    ```
+
+### Running the Project
+
+4. **Run the Project**: Use `cargo-watch` to automatically compile and run the project when files change. First, install `cargo-watch` if it's not already installed:
+
+    ```bash
+    cargo install cargo-watch
+    ```
+
+   Then, start the project with:
+
+    ```bash
+    cargo watch -x run
+    ```
+
+This command will start the application and watch for file changes, automatically recompiling and restarting the server as needed.

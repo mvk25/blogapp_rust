@@ -35,3 +35,12 @@ pub struct DashboardTemplate {
 pub struct PostTemplate {
     pub(crate) error: Option<String>,
 }
+
+#[derive(Template)]
+#[template(path = "singlepost.html")]
+pub struct SinglePostTemplate {
+    pub(crate) post: Option<Posts>,
+}
+
+
+

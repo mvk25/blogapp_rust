@@ -8,6 +8,8 @@ pub struct Posts {
     pub id: i32,
     pub title: String,
     pub body: String,
+    pub sub_title: String,
+    pub slug: String,
     pub is_published: bool,
     pub img: String,
     pub published_by: String,
@@ -22,6 +24,8 @@ pub struct NewPost {
     pub title: String,
     pub body: String,
     pub img: String,
+    pub slug: String,
+    pub sub_title: String,
     pub published_by: String,
 }
 
@@ -30,5 +34,12 @@ pub struct NewPostForm {
     pub title: String,
     pub body: String,
     pub img: String,
+    pub slug: String,
+    pub sub_title: String,
     pub published_by: String,
+}
+
+#[derive(Deserialize)]
+pub struct PostSlug {
+    pub slug: String
 }

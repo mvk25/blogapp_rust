@@ -15,6 +15,8 @@ diesel::table! {
     posts (id) {
         id -> Int4,
         title -> Text,
+        sub_title -> Text,
+        slug -> Text,
         body -> Text,
         is_published -> Bool,
         img -> Text,

@@ -22,3 +22,12 @@ pub fn get_all_posts(connection: &mut PgConnection) -> Vec<Posts> {
 
     all_posts
 }
+
+pub fn get_post_by_slug(connection: &mut PgConnection, post_slug: String) -> Option<Posts> {
+    let post = posts.filter(slug.eq(post_slug)).first::<Posts>(connection).optional().unwrap_or_else(|err| {
+        println!("An error occurred while fetching the single post: {err}");
+        None
+    });
+
+    post
+}

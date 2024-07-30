@@ -1,10 +1,10 @@
 use actix_web::{HttpResponse, Responder, web};
-use crate::models::ui::DashboardTemplate;
+use crate::models::ui::{DashboardTemplate, SinglePostTemplate};
 use crate::models::{posts::*, ui::PostTemplate};
 use crate::models::app_state::AppState;
 use diesel::{RunQueryDsl};
 use askama::Template;
-use crate::db_operations::posts::get_all_posts;
+use crate::db_operations::posts::{get_all_posts, get_post_by_slug};
 
 pub async fn post_page(error: Option<String>) -> HttpResponse {
     let template = PostTemplate { error };
@@ -23,7 +23,9 @@ pub async fn add_post(post: web::Form<NewPostForm>, state: web::Data<AppState>) 
         title: post.title.clone(),
         body: post.body.clone(),
         img: post.img.clone(),
-        published_by: post.published_by.clone()
+        published_by: post.published_by.clone(),
+        slug: post.slug.clone(),
+        sub_title: post.sub_title.clone()
     };
 
     let mut connection = state.db_connection.lock().unwrap();
@@ -42,4 +44,12 @@ pub async fn add_post(post: web::Form<NewPostForm>, state: web::Data<AppState>) 
             HttpResponse::Ok().content_type("text/html").body(template.render().unwrap())
         }
     }
+}
+
+pub async fn single_post(state: web::Data<AppState>, slug: web::Path<PostSlug>) -> impl Responder {
+    let slug = slug.slug.clone();
+    let mut connection = state.db_connection.lock().unwrap();
+    let post = get_post_by_slug(&mut *connection, slug);
+    let template = SinglePostTemplate { post: post };
+    HttpResponse::Ok().content_type("text/html").body(template.render().unwrap())
 }

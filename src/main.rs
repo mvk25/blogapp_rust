@@ -36,6 +36,7 @@ async fn main() -> std::io::Result<()> {
             .route("/dashboard", web::get().to(dashboard_page))
             .route("/add-post", web::get().to(post_page))
             .route("/add-post", web::post().to(add_post))
+            .route("post/{slug}", web::get().to(single_post))
 
     }).bind("127.0.0.1:8080")?.run().await
 

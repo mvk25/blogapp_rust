@@ -54,6 +54,7 @@ pub struct DashboardTemplate {
     pub(crate) email: Option<String>,
     pub(crate) posts: Option<Vec<Posts>>,
 }
+```
 
 ### Using Rust in HTML Templates
 
@@ -70,6 +71,7 @@ In the HTML template, Rust code and syntax are embedded to dynamically generate 
         {% endfor %}
     {% endif %}
 </div>
+```
 
 
 ## Setup and Running the Project
